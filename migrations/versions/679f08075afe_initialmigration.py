@@ -1,8 +1,8 @@
 """initialmigration
 
-Revision ID: bc9da55e24dd
+Revision ID: 679f08075afe
 Revises: 
-Create Date: 2025-03-28 23:38:49.146636
+Create Date: 2025-03-29 02:41:26.290412
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'bc9da55e24dd'
+revision = '679f08075afe'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,11 +46,11 @@ def upgrade():
     sa.Column('city', sa.String(length=50), nullable=False),
     sa.Column('location', sa.String(length=100), nullable=True),
     sa.Column('contact_number', sa.String(length=20), nullable=False),
-    sa.Column('blood_type', sa.String(length=10), nullable=False),
-    sa.Column('urgency_level', sa.String(length=50), nullable=False),
-    sa.Column('status', sa.String(length=50), nullable=True),
-    sa.Column('units_needed', sa.Integer(), nullable=True),
     sa.Column('hospital_id', sa.Integer(), nullable=False),
+    sa.Column('blood_type', sa.String(length=5), nullable=False),
+    sa.Column('units_needed', sa.Integer(), nullable=False),
+    sa.Column('urgency_level', sa.String(length=20), nullable=False),
+    sa.Column('status', sa.String(length=20), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['hospital_id'], ['hospital.id'], ),
     sa.PrimaryKeyConstraint('id')

@@ -4,7 +4,7 @@ from app import db
 from werkzeug.exceptions import NotFound, BadRequest
 from sqlalchemy.exc import SQLAlchemyError
 
-donor_bp = Blueprint('donor', __name__)
+donor_bp = Blueprint('donor', __name__, url_prefix='/api/v1/donors')
 
 # GET all donors
 @donor_bp.route('/', methods=['GET'])
@@ -62,7 +62,7 @@ def create_donor():
         return jsonify({'error': str(e)}), 400  # Handle bad request error
     except SQLAlchemyError:
         db.session.rollback()  # Rollback in case of DB error
-        return jsonify({'error': 'Database error occurred'}), 500  # Handle DB error
+        return jsonify({'error': 'Database error occurred'}), 500  
 
 # PUT to update an existing donor
 @donor_bp.route('/<int:id>', methods=['PUT'])

@@ -1,5 +1,6 @@
 from datetime import datetime
 from app.extensions import db
+
 class Donor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -10,7 +11,8 @@ class Donor(db.Model):
     city = db.Column(db.String(50), nullable=False)
     location = db.Column(db.String(100))  # Optional GPS coordinates
     availability_status = db.Column(db.Boolean, default=True)  # True = Available
-
+    
+    # Use string-based relationship to avoid circular imports
     donations = db.relationship('DonationRecord', backref='donor', lazy=True)
     
     def to_dict(self):
